@@ -1,6 +1,3 @@
-var pgp = require('pg-promise')({
-    //Initialization
-});
 
 // Connection parameters
 const connection = {
@@ -12,12 +9,6 @@ const connection = {
 };
 
 // // Global object from connection details
-export default ()=> {
+export default (pgp)=> {
 	pgp(connection)
-		.then(()=>{
-			console.log("connected to pg db")
-		})
-		.catch(()=>{
-			console.log("error connecting to pg db")
-		})
 } 
