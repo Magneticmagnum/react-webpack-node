@@ -1,8 +1,6 @@
 import express from 'express';
 import webpack from 'webpack';
-import { ENV } from './config/appConfig';
 import { connect } from './db';
-import passportConfig from './config/passport';
 import expressConfig from './config/express';
 import routesConfig from './config/routes';
 import webpackDevConfig from '../webpack/webpack.config.dev-client';
@@ -14,14 +12,10 @@ const app = express();
  * - connect to MongoDB using mongoose
  * - register mongoose Schema
  */
-connect();
+// connect();
 
-/*
- * REMOVE if you do not need passport configuration
- */
-passportConfig();
 
-if (ENV === 'development') {
+
   const compiler = webpack(webpackDevConfig);
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
@@ -29,7 +23,7 @@ if (ENV === 'development') {
   }));
 
   app.use(require('webpack-hot-middleware')(compiler));
-}
+
 
 /*
  * Bootstrap application settings
